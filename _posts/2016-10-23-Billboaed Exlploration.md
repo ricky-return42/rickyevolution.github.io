@@ -29,13 +29,10 @@ We start off by importing all the modules that will be (could be) helpful during
 
 {% highlight python %}
 billboard.info()
-{% endhighlight %}
-
-It will provide us with the information such as column name, non-null entries and data type. However for the datasets with larger amount of columns, it would return a very long list which is not desirable. A similar result was also observed with the .describe() operation. The .describe() operation returns a summary statistics for numerical columns
-
-{% highlight python %}
 billboard.describe()
 {% endhighlight %}
+
+It will provide us with the information such as column name, non-null entries and data type. However for the datasets with larger amount of columns, it would return a very long list which is not desirable. A similar result was also observed with the .describe() operation. The .describe() operation returns a summary statistics for numerical columns (mean, median, )
 
 Jupyter has trouble printing all the columns out at once. Therefore the dataframe was divided into groups of 10 and 1 group is printed at a time. The key things to look for here are any abnormal values in min, max where they should be integers bigger than 0 and less than 100.
 
@@ -117,8 +114,8 @@ def re_name(x):
 billboard.rename(columns=lambda x: re_name(x), inplace=True)
 
 #Actual melt and clean up
-melt_value_list = list(billboard.columns)[4:-5] #The columns to transform
-melt_index_list = list(billboard.columns)[:4] + list(billboard.columns)[-5:] #The columns to keep
+melt_value_list = list(billboard.columns)[4:-6] #The columns to transform
+melt_index_list = list(billboard.columns)[:4] + list(billboard.columns)[-6:] #The columns to keep
 billboard_melted = pd.melt(billboard, id_vars = melt_index_list, value_vars= melt_value_list)
 billboard_melted.rename(columns = {'variable':'week', 'value':'rank'}, inplace=True) #Rename columns
 billboard_melted = billboard_melted[billboard_melted['rank'].notnull()] #Remove redundant columns
@@ -130,4 +127,21 @@ billboard_melted['week'] = billboard_melted['week'].astype(int)
 billboard_melted['genre'] = billboard_melted['genre'].astype('category')
 {% endhighlight %}
 
-We now have 2 data frames. It would be nice to keep the original dataframe too as different dataframes are better suited at different type of analysis. 
+We now have 2 data frames. It would be nice to keep the original dataframe too as different dataframes are better suited at different type of analysis. Therefore pivot tables are generated from the melted dataframe and merged back into the original dataframe. Pivot tables are very useful tools in data analysis as it allows us to compute statistics for different groupings. In our case they are used to find the number of times a track appears in the melted dataframe (i.e. How long did it stay in the dataframe in total) and the minimum rank number (i.e. the highest rank). We have discovered that there are 2 tracks that have the same name so we have to be very careful when performing the pivot table analysis. One way to solve this problem is to create an new column named 'artist_track' which combines the strins from the artist column and the track column so every item in that column would be unique. For our purpose, the original 'track' column will be dropped. A column called 'total_weeks_in' is introduced to give information of how long has the track stayed in the chart. An example of the new columns are showed below.
+
+![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477243815/Screen_Shot_2016-10-23_at_18.29.36_yecgk4.png)
+
+<h2>Step 3: Visualisations to spot interesting trends!</h2>
+
+Having cleaned the data, it is now time to do some plotting! I would like to know what factors are likely to be correlated with how successful the track is (High rank and long staying). The following factors will be investigated:
+- Track title length (really?)
+- Track length
+- Genre
+- Artist
+- Number of days to peak (some kind of momentum)
+- Months entered
+
+
+
+![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244957/Screen_Shot_2016-10-23_at_18.48.29_lx6x4m.png)![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)
+
