@@ -83,7 +83,7 @@ It is also important to note that some columns have names that are either unnece
 
 {% highlight python %}
 billboard = billboard.rename(columns={'artist.inverted':'artist', 
-'date.entered':'date_entered',
-'date.peaked':'date_peaked'})
+									  'date.entered':'date_entered',
+									  'date.peaked':'date_peaked'})
 {% endhighlight %}
 
