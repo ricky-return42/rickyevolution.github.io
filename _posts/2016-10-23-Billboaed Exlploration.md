@@ -162,6 +162,36 @@ The median track title length is 3 words and the marjority of tracks have a titl
 
 From the above plots we can see that most trakcs last less than 5 minutes. In terms of rank there seems to be little correlation (but the excpetionally long ones i.e. over 7 minutes seems to be doing pretty well). It seems that if a track would like to stay longer in the chart, it'd be better for to last fewer than 6 minutes. This is because the longer few could not last over 20 weeks. Speaking of which this scatter plot show us a very interesting pattern. There is a huge cluster around the 20 minutes mark which we described earlier. This mark forms a very recognisable line in the plot. Therefore it can be suspected that something artificial is going on.
 
- <h4>Genre</h4>
+<h4>Genre</h4>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477253143/Screen_Shot_2016-10-23_at_21.05.15_sqs5t3.png)
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477253143/Screen_Shot_2016-10-23_at_21.05.04_t1lvmh.png)
+
+It is obvious even from a glance that rock music dominated the chart in 2000. The number of rock music, having a count of over 130, almost doubled the second place - country. Some music types such as gospel, jazz and reggae
+were almost non exsistent. In terms of ranking, the few jazz entrants did significantly better than other types of music averaging within top 10. The other trend to look out for is the relatively poor performance of R&B with a below average rank and below average in-chart time.
+
+<h4>Number of days to peak</h4>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477254012/Screen_Shot_2016-10-23_at_21.19.46_lzs5cs.png)
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477253936/Screen_Shot_2016-10-23_at_21.18.03_ql6jib.png)
+
+This variable seems to be able to shows more correlation with how well the track performs. From the histogram we know that the majority of the tracks took less than 100 days to reach their peak. This is a reasonable observation as we know that many of them will be gone by about 140 days (20 weeks). It seems that the higher reaching tracks usually takes longer (although not by much) to reach the top. Therefore this momentum could be an indicator of whether a track would reach the very top. More interestingly the number of days to peak correlates really well with how long the track stays in the chart. This is kind of trivial because obvious the grow in one can only also result in a grow in the other. However if we think about it there is always a chance that a track drops straight out of the chart once its peaked and this plot can be used to argue against such proposal.
+
+<h4>Month entered</h4>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477255242/Screen_Shot_2016-10-23_at_21.39.46_u11cut.png)
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477255242/Screen_Shot_2016-10-23_at_21.40.07_kvup34.png)
+
+The number of tracks entering the chart for each different month is very similar. The performance though varies by a larger degree. The entries from April, May and October had a reached a higher rank on average and also stayed in the chart for longer.
+
+<h3>The targets against each other...</h3>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477255669/Screen_Shot_2016-10-23_at_21.47.25_lcxedm.png)
+
+These 2 variables related relatively well as expected. Popular tracks tend to reach a higher rank and stay in the chart for longer. However there is an outlier at the bottom left corner. This track reached within top 10 (7th place to be exact) but only existed in the chart for 5 weeks. This is a jazz track (which matches our observation well) by Kenny G called Auld Lang Syne (The Millenium Mix). Its behavious could be due to the fact that the song itself is very old but well known. Therefore with a good performance it can catch people's attention. However the hype was soon over and excitment didn't last long.
+
 
 
