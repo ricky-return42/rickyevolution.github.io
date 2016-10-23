@@ -143,5 +143,6 @@ Having cleaned the data, it is now time to do some plotting! I would like to kno
 
 
 
-![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244957/Screen_Shot_2016-10-23_at_18.48.29_lx6x4m.png)![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)
+<center>![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244957/Screen_Shot_2016-10-23_at_18.48.29_lx6x4m.png)</center>
+<center>![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)</center>
 
