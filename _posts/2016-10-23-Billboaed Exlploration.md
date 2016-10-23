@@ -84,8 +84,8 @@ It is also important to note that some columns have names that are either unnece
 
 {% highlight python %}
 billboard = billboard.rename(columns={'artist.inverted':'artist', 
-			'date.entered':'date_entered',
-			'date.peaked':'date_peaked'})
+					'date.entered':'date_entered',
+					'date.peaked':'date_peaked'})
 {% endhighlight %}
 
 As mentioned in step 1, we would like to look at the relationship between a track's length and its other properties. However the track length is currently in a format of mm:ss as a string. It is not very easy to use so a function is written to convert that into number of seconds as integers. The time column would not be very useful either after the conversion so it will be dropped. The same case also applies for 'date_entered' and 'date_peaked'. Therefore their data types are transformed from strings into datetime which allows us to measure date difference as timedeltas. It would also be nice to create an extra column where we store the month of 'date_entered'. This would allow us to conveniently investigate any cyclic behaviour that might exsist.
