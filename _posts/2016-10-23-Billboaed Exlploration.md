@@ -145,9 +145,23 @@ First lets look at how the our targets (maximum rank and number of weeks in char
 ![Billboard max rank distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477245701/Screen_Shot_2016-10-23_at_19.00.54_ee4rfm.png)
 ![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)
 
-Now we proceed to look at how the different variables and their effect on track popularity. The first variable is the track title length and the relevant plots are shown below:
-<insert image!!!!!>
-![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251597/Screen_Shot_2016-10-23_at_19.36.25_qystc3.png)
-![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251549/Screen_Shot_2016-10-23_at_20.38.41_uktv39.png)
+Now we proceed to look at how the different variables and their effect on track popularity. 
 
-The median track title length is 3 words and the marjority of tracks have a title length of 2 to 4 
+<h4>Track title length</h4>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251597/Screen_Shot_2016-10-23_at_19.36.25_qystc3.png)
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251808/Screen_Shot_2016-10-23_at_20.42.56_kud0qe.png)
+
+The median track title length is 3 words and the marjority of tracks have a title length of 2 to 4. However when we look at the bar chart, we would discover that there seems to be little correlation between track title length and how successful the track is. The most we can say is that tracks titles with an odd number length seems to be rnak higher than the others. However we would need further investigations to prove that
+
+<h4>Track length</h4>
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477252191/Screen_Shot_2016-10-23_at_20.48.29_xfvfci.png)
+
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477252201/Screen_Shot_2016-10-23_at_20.49.26_zsgldg.png)
+
+From the above plots we can see that most trakcs last less than 5 minutes. In terms of rank there seems to be little correlation (but the excpetionally long ones i.e. over 7 minutes seems to be doing pretty well). It seems that if a track would like to stay longer in the chart, it'd be better for to last fewer than 6 minutes. This is because the longer few could not last over 20 weeks. Speaking of which this scatter plot show us a very interesting pattern. There is a huge cluster around the 20 minutes mark which we described earlier. This mark forms a very recognisable line in the plot. Therefore it can be suspected that something artificial is going on.
+
+ <h4>Genre</h4>
+
+
