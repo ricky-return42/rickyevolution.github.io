@@ -103,9 +103,11 @@ billboard.drop(['date_entered','date_peaked'], axis =1, inplace = True)
 billboard['month_entered'] = billboard['datetime_entered'].apply(lambda x:x.month)
 {% endhighlight %}
 
- The huge number of columns in the original dataframe is not optimal for some data analysis such as time series.Using the .melt() function in Pandas, one can pivot the weekly ranking data into rows. This operation changes the 65 non-empty ranking columns into 2 columns namely 'week' and 'rank'. There will now be multiple entries for each track, one for each week on the Billboard rankings. The following operation is carried out as preperation before the melt.
+The huge number of columns in the original dataframe is not optimal for some data analysis such as time series.Using the .melt() function in Pandas, one can pivot the weekly ranking data into rows. This operation changes the 65 non-empty ranking columns into 2 columns namely 'week' and 'rank'. There will now be multiple entries for each track, one for each week on the Billboard rankings. The following code describes the operations that prepare and perform the melt.
 
- def re_name(x):
+{% highlight python %}
+# Preperation
+def re_name(x):
     if (len(x)==10) & (x[0]=='x'):
         return int(x[1:3])
     elif (x[0]=='x'):
@@ -113,3 +115,19 @@ billboard['month_entered'] = billboard['datetime_entered'].apply(lambda x:x.mont
     else:
         return x
 billboard.rename(columns=lambda x: re_name(x), inplace=True)
+
+#Actual melt and clean up
+melt_value_list = list(billboard.columns)[4:-5] #The columns to transform
+melt_index_list = list(billboard.columns)[:4] + list(billboard.columns)[-5:] #The columns to keep
+billboard_melted = pd.melt(billboard, id_vars = melt_index_list, value_vars= melt_value_list)
+billboard_melted.rename(columns = {'variable':'week', 'value':'rank'}, inplace=True) #Rename columns
+billboard_melted = billboard_melted[billboard_melted['rank'].notnull()] #Remove redundant columns
+# Create a column to show the current week
+dt = timedelta(days=7)
+billboard_melted['week'] = billboard_melted['week'].astype(int)
+billboard_melted['datetime_current'] = billboard_melted['datetime_entered'] + (billboard_melted['week']-1)*dt
+billboard_melted['week'] = billboard_melted['week'].astype(int)
+billboard_melted['genre'] = billboard_melted['genre'].astype('category')
+{% endhighlight %}
+
+We now have 2 data frames. It would be nice to keep the original dataframe too as different dataframes are better suited at different type of analysis. 
