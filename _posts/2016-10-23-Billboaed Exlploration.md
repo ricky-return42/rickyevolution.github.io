@@ -43,8 +43,27 @@ for i in np.linspace(0,80,9):
     print'-------------------------------'
 {% endhighlight %}
 
+After the inspections it seems that all the contained values are reasonable. However giving the data a deepe thought, one might wonder whether all the tracks exists on the board continuously. Is it possible for a track to be dropped from the board and return? The following code returns a list of boolean values where a False indicates a track has made a come back.
 
+{% highlight python %}
+weeks = billboard.iloc[:,7:]
+weeks['nncount'] = weeks.notnull().sum(axis=1)
+continuous_lst = []
+for i in range(weeks.shape[0]):
+    ind = weeks.nncount[i]
+    continuous_lst.append(all(weeks.iloc[i,:ind-1].notnull())) #end of list is ind-1 because we have introduced column 'nncount'
+print continuous_lst
+{% endhighlight %}
 
+It is found out that there were 9 tracks that successfully made a come back!
+
+Here I am going to introduce another operation that is very useful for summary analysis. It is the .value_counts() operation. This operation can be seen as a pivot table showing the counts for each unique value in the series. The following are examples where we can use .value_ counts()!
+
+{% highlight python %}
+billboard['track'].value_counts() #To find out whether track names are unique
+billboard['genre'].value_counts()
+billboard['artist.inverted'].value_counts()
+{% endhighlight %}
 
 
 
