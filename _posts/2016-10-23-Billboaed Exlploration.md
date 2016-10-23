@@ -137,12 +137,17 @@ Having cleaned the data, it is now time to do some plotting! I would like to kno
 - Track title length (really?)
 - Track length
 - Genre
-- Artist
 - Number of days to peak (some kind of momentum)
 - Months entered
 
+First lets look at how the our targets (maximum rank and number of weeks in chart). It can be seen that there are quite a lot of tracks (nearly 40) made it to the top bin which is on the left hand side. Then the rest are distributed quite evenly across the spectrum. The staying of the tracks are also interesting. It should be expected that as time goes by the number of tracks staying in the chart would drop. It is surprising to see that there is a very obvious peak at the bin around 20-23. That means most tracks dropped out at their early 20s(week).
 
+![Billboard max rank distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477245701/Screen_Shot_2016-10-23_at_19.00.54_ee4rfm.png)
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)
 
-<center>![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244957/Screen_Shot_2016-10-23_at_18.48.29_lx6x4m.png)</center>
-<center>![Billboard extra columns](http://res.cloudinary.com/dexpzle9i/image/upload/v1477244956/Screen_Shot_2016-10-23_at_18.48.41_zfbffs.png)</center>
+Now we proceed to look at how the different variables and their effect on track popularity. The first variable is the track title length and the relevant plots are shown below:
+<insert image!!!!!>
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251597/Screen_Shot_2016-10-23_at_19.36.25_qystc3.png)
+![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477251549/Screen_Shot_2016-10-23_at_20.38.41_uktv39.png)
 
+The median track title length is 3 words and the marjority of tracks have a title length of 2 to 4 
