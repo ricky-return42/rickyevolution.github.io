@@ -6,7 +6,7 @@
 name: Ricky's Data Blog
 
 # Short bio or description (displayed in the header)
-description: Web Developer from Somewhere
+description: To-be data scientist from somewhere
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: http://res.cloudinary.com/dexpzle9i/image/upload/v1476780086/1395999_10151961805781294_616429425_n_slcvtr.jpg
@@ -21,12 +21,12 @@ footer-links:
   email:
   facebook:
   flickr:
-  github: barryclark/jekyll-now
+  github: https://github.com/rickyevolution
   instagram:
   linkedin:
   pinterest:
   rss: # just type anything here for a working RSS icon
-  twitter: jekyllrb
+  twitter: 
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/

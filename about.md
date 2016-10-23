@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Let me think of something to add later...
+This blog is full of fluids...blood, sweat, tear, spilled coffee, you name it...
 
 ### More Information
 
-If I can't figure out the first bit, this bit would be even harder wouldn't it?
+return 42
 
 ### Contact me
 
