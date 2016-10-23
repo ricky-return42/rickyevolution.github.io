@@ -160,7 +160,9 @@ The median track title length is 3 words and the marjority of tracks have a titl
 
 ![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477252201/Screen_Shot_2016-10-23_at_20.49.26_zsgldg.png)
 
-From the above plots we can see that most trakcs last less than 5 minutes. In terms of rank there seems to be little correlation (but the excpetionally long ones i.e. over 7 minutes seems to be doing pretty well). It seems that if a track would like to stay longer in the chart, it'd be better for to last fewer than 6 minutes. This is because the longer few could not last over 20 weeks. Speaking of which this scatter plot show us a very interesting pattern. There is a huge cluster around the 20 minutes mark which we described earlier. This mark forms a very recognisable line in the plot. Therefore it can be suspected that something artificial is going on.
+From the above plots we can see that most trakcs last less than 5 minutes. In terms of rank there seems to be little correlation (but the excpetionally long ones i.e. over 7 minutes seems to be doing pretty well). It seems that if a track would like to stay longer in the chart, it'd be better for to last fewer than 6 minutes. This is because the longer few could not last over 20 weeks. Speaking of which this scatter plot show us a very interesting pattern. There is a huge cluster around the 20 minutes mark which we described earlier. This mark forms a very recognisable line in the plot. Therefore it can be suspected that something artificial is going on.The explanation can be found in <a href = 'https://en.wikipedia.org/wiki/Billboard_Hot_100'>this wikipedia page</a> which stated that: 
+
+"a song is permanently moved to "recurrent status" if it has spent 20 weeks on the Hot 100 and fallen below position number 50. Additionally, descending songs are removed from the chart if ranking below number 25 after 52 weeks.Exceptions are made to re-releases and sudden resurgence in popularity of tracks that have taken a very long time to gain mainstream success. These rare cases are handled on a case-by-case basis and ultimately determined by Billboard's chart managers and staff."
 
 <h4>Genre</h4>
 
@@ -192,6 +194,42 @@ The number of tracks entering the chart for each different month is very similar
 ![Billboard duration distribution](http://res.cloudinary.com/dexpzle9i/image/upload/v1477255669/Screen_Shot_2016-10-23_at_21.47.25_lcxedm.png)
 
 These 2 variables related relatively well as expected. Popular tracks tend to reach a higher rank and stay in the chart for longer. However there is an outlier at the bottom left corner. This track reached within top 10 (7th place to be exact) but only existed in the chart for 5 weeks. This is a jazz track (which matches our observation well) by Kenny G called Auld Lang Syne (The Millenium Mix). Its behavious could be due to the fact that the song itself is very old but well known. Therefore with a good performance it can catch people's attention. However the hype was soon over and excitment didn't last long.
+
+<h2>The problem statement?</h2>
+
+From the EDA and plottings in previous sections, we were able to demonstrate the (lack of) relaionship between music tracks properties. It is also interesting to discover that there were some tracks that were able to make a come back after dropping out of the chart. This is not a common characteristic which is worth more investigation. Therefore the problem statement here would be to find out whether these resurrected tracks are different to the others in terms of: 
+- maximum ranks
+- duration
+
+<h4>Procedure</h4>
+- First look at the data as a whole. Since we are looking at data from 2000 only it is safe to assume that our data is the population.
+- The null hypothesis would be that they are the same. Alternate hypothesis would be that they are different!
+- In order to determine the difference between sample and population, a t-test will be used since although we have the population mean and standard deviation, the sample size is small (under 30)
+- Set a proper alpha level
+- Find out the mean and standard deviation of max rank for the population
+- Find out the number of come-back tracks (this would serve as the sample size)
+- Due to Central Limit Theorem, the smple mean would be equal to the population mean
+- The sample standard deviation would be the sqrt(sum of squared deviation/sample size -1)
+- Find the mean for the come back group
+- Find the difference of the means and divide by (sample standard deviation)/sqrt(sample size)
+- Determine degrees of freedom
+- Find the p-value using a t-table and determine whether to reject or accept the null hypothesis
+- Repeat process with duration in the chart
+
+The code used is shown in the below snippet. Note that the same analysis was carried out for the duration in chart analysis too.
+{% highlight python %}
+max_rank_population_mean = billboard['max_rank'].mean()
+max_rank_population_std = billboard['max_rank'].std()
+come_back_index = [i for i in range(len(continuous_lst)) if not continuous_lst[i]]
+sample_size = len(come_back_index)
+come_back_max_rank_list = [billboard['max_rank'][i] for i in come_back_index]
+sum_of_sq_deviation = np.sum([(i - max_rank_population_mean)**2 for i in come_back_max_rank_list])
+sample_standard_deviation = (sum_of_sq_deviation/(sample_size-1))**0.5
+come_back_max_rank_list_mean = np.mean(come_back_max_rank_list)
+t_stat = (come_back_max_rank_list_mean - max_rank_population_mean) / (sample_standard_deviation/(len(come_back_index)**0.5))
+{% endhighlight %}
+
+Since this is not a very critical scientific test, an alpha level of 0.05 is good enough. The degrees of freedom is 10 - 1 =9. After consulting the t-table it is determined that the t-statistic is 0.505. Since our aplpha level is 0.05, it requires a t-statistics of >2.262 or <-2.262 to reject the null hypothesis. In conclusion it is reasonable to accept the null hypothesis and say that the maximum rank of the come-back tracks are reasonably similar to the population. For duration we have a t-statistics of 1.066. It is also not possible for us to declare that the come-back tracks have a significantly different total staying period comparing to the whole population. Since the sample size is so small, it is very difficult to reject the null hypothesis. Therefore it would be very beneficial to include more samples from other years in order to further investigate the properties of these special tracks that made a come back.
 
 
 
