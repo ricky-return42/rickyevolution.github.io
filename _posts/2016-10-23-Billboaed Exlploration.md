@@ -5,6 +5,8 @@ title: How Billboard champions are made
 
 I apologise for the messy blog last week and I hope it can be done better! Therefore in this week's blog there would be a mini walk through to demonstrate how one can use Python and its very powerful modules to perform data analysis! The dataset that we will be using today is the Billboard Hot 100 data back in 2000. The Billboard chart is the standard for music industry in the United States. Let’s dive in and explore the data!
 
+<h2>Step 1: Load the data and do some preliminary look around!</h2>
+
 {% highlight python %}
 
 import pandas as pd #Pandas is a very powerful module which handles data as a data frame
@@ -22,7 +24,7 @@ billboard.head()
 
 ![Billboard.csv head](http://res.cloudinary.com/dexpzle9i/image/upload/v1477219542/Screen_Shot_2016-10-23_at_11.44.27_zun5vw.png)
 
-The head() operation shows the top 5 entries of a data frame. Looking at the result, we can tell that each row represents an individual track. There are 83 columns.  All the entries are self-explanatory apart from the ones that have the format ‘x”n”.week’.  These columns represents the ranking of the track in the ‘n’th week. It is very important to note that this is a relative measure since the tracks entered the board at different dates. It is usually very convenient to use the following operation to gain more insight from a data frame.
+We start off by importing all the modules that will be (could be) helpful during the analysis. Then the targeted csv file is read in. The head() operation shows the top 5 entries of a data frame. Looking at the result, we can tell that each row represents an individual track. There are 83 columns.  All the entries are self-explanatory apart from the ones that have the format ‘x”n”.week’.  These columns represents the ranking of the track in the ‘n’th week. It is very important to note that this is a relative measure since the tracks entered the board at different dates. It is usually very convenient to use the following operation to gain more insight from a data frame.
 
 {% highlight python %}
 billboard.info()
@@ -69,5 +71,19 @@ Here is a brief summary of the data set:
 
 After the investigation, we can see that there are 317 rows and 83 columns in the data. Out of them there are 6 columns with a data type 'object' (Which would very likely be strings).  It is important to note that the date columns namely 'date entered' and 'date peaked' can possibly be transformed to datetime values for further analysis. The 'time' column can also be transformed into integer to investigate the relationship between the length of a track and its popularity. It is also worthwhile to note that there are two tracks both named "Where I Wanna Be" and it is important not to mix them up. There are a total of 10 genres of music and Rock is the most popular. There are 228 unique artist/groups involved in the dataset. Jay-z has the most track entries of 5. From week 66 onwards all the columns are empty which means no tracks has stayed in the chart for more than 65 weeks. Therefore the extra columns should be removed. The track that stayed the longest is Higher performed by Creed. Finally it is very easy to be tricked by the results returned by .info() operation. This is because it is shown that the number of non-null values decreases with the week which is very normal. However under a more detailed investigation it appears that those numbers were not composed of the same group of tracks everytime. For example track 'a', 'b', 'c' are both in the board at week 1 (count = 3). Track 'a' dropped out in week 2 (count =2). In the third week track a comes back but track 'b' and 'c' drops out (count =1). This behaviour can potentially complicates the analysis and catch out the less careful analyst.
 
+<h2>Step 2: Clean the data and turn it into something more useful!</h2>
 
+Although the data seems interesting, it must first be cleaned before using! Cleaning a data set speeds up the analysis process and lowers the chances of error occuring. It is mentioned that in our dataset there are quite a few empty columns. Therefore it would be nice to get rid of them
+
+{% highlight python %}
+billboard = billboard.iloc[:,:72] #get rid of the empty columns bt slicing
+{% endhighlight %}
+
+It is also important to note that some columns have names that are either unnecessarily long or consists of a '.' character. The former makes the column difficult to undersntad/read and the later might cause Python to exhibit unpredictable behaviour due to the dot notation. Therefore it is also a good practise to rename colums to as simple as possible. If spaces are need between words, an underscore '_' character can be used.
+
+{% highlight python %}
+billboard = billboard.rename(columns={'artist.inverted':'artist', 
+'date.entered':'date_entered',
+'date.peaked':'date_peaked'})
+{% endhighlight %}
 
