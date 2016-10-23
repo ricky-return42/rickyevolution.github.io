@@ -14,6 +14,7 @@ import numpy as np #Fast and convenient modules for numerical operrations
 import scipy as sp #Similar function as numpy more statistics focus
 import matplotlib.pyplot as plt #plotting tool for python
 import seaborn as sns #A nicer looking plotting tool
+from datetime import timedelta #This moduel deals with time data
 %matplotlib inline
 
 billboard = pd.read_csv('../assets/billboard.csv')
@@ -76,7 +77,7 @@ After the investigation, we can see that there are 317 rows and 83 columns in th
 Although the data seems interesting, it must first be cleaned before using! Cleaning a data set speeds up the analysis process and lowers the chances of error occuring. It is mentioned that in our dataset there are quite a few empty columns. Therefore it would be nice to get rid of them
 
 {% highlight python %}
-billboard = billboard.iloc[:,:72] #get rid of the empty columns bt slicing
+billboard = billboard.iloc[:,:72] #get rid of the empty columns by slicing
 {% endhighlight %}
 
 It is also important to note that some columns have names that are either unnecessarily long or consists of a '.' character. The former makes the column difficult to undersntad/read and the later might cause Python to exhibit unpredictable behaviour due to the dot notation. Therefore it is also a good practise to rename colums to as simple as possible. If spaces are need between words, an underscore '_' character can be used.
@@ -87,3 +88,28 @@ billboard = billboard.rename(columns={'artist.inverted':'artist',
 									  'date.peaked':'date_peaked'})
 {% endhighlight %}
 
+As mentioned in step 1, we would like to look at the relationship between a track's length and its other properties. However the track length is currently in a format of mm:ss as a string. It is not very easy to use so a function is written to convert that into number of seconds as integers. The time column would not be very useful either after the conversion so it will be dropped. The same case also applies for 'date_entered' and 'date_peaked'. Therefore their data types are transformed from strings into datetime which allows us to measure date difference as timedeltas. It would also be nice to create an extra column where we store the month of 'date_entered'. This would allow us to conveniently investigate any cyclic behaviour that might exsist.
+
+{% highlight python %}
+def time_con(str):
+    lst = str.split(':')
+    secs = int(lst[0])*60 + int(lst[1])
+    return secs
+billboard['time_in_seconds'] = billboard.time.apply(time_con)
+billboard.drop(['time'], axis =1, inplace = True)
+billboard['datetime_entered'] = pd.to_datetime(billboard['date_entered'])
+billboard['datetime_peaked'] = pd.to_datetime(billboard['date_peaked'])
+billboard.drop(['date_entered','date_peaked'], axis =1, inplace = True)
+billboard['month_entered'] = billboard['datetime_entered'].apply(lambda x:x.month)
+{% endhighlight %}
+
+ The huge number of columns in the original dataframe is not optimal for some data analysis such as time series.Using the .melt() function in Pandas, one can pivot the weekly ranking data into rows. This operation changes the 65 non-empty ranking columns into 2 columns namely 'week' and 'rank'. There will now be multiple entries for each track, one for each week on the Billboard rankings. The following operation is carried out as preperation before the melt.
+
+ def re_name(x):
+    if (len(x)==10) & (x[0]=='x'):
+        return int(x[1:3])
+    elif (x[0]=='x'):
+        return int(x[1])
+    else:
+        return x
+billboard.rename(columns=lambda x: re_name(x), inplace=True)
