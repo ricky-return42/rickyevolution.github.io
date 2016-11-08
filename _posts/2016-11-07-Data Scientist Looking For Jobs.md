@@ -49,9 +49,8 @@ Since we predict and test using the same data we are in great danger of making a
 
 There are 2 important values in the evaluation of classification analysis and they are precision and recall.
 
-Precision is calculated by: $$\frac{True Positive}{True Positive + False Positive}$$
 
-and Recall is calculated by: $$\frac{True Positive}{True Positive + False Negative}$$
+![equations](http://res.cloudinary.com/dexpzle9i/image/upload/v1478565194/Screen_Shot_2016-11-08_at_00.32.49_tkapdy.png)
 
 In our case precision is the probability that a job is high paid when we predict them to be high paid. Recall on the other hand represents how likely it is for us to predict high paying jobs as they are. Although in the first place they might sound similar, there are large implications behind these numbers. For example in medical diagnosis we would like a very high recall because we do not want a lot of false negative (which could be lethal). On the other hand if we were an intelligence officer during the cold war times, precision is critical. This is because we do not to mis-interpret a false positive missile attack and launch our own nuclear weapon (hence initiating a war, and/or the destruction of mankind...). However these two terms are trade-offs and we can not improve one without sacrifising the other (when we use the same model). Regarding to our problem, we do not wish to tell the client that he will receive high salary whereas in reality this is not true. Therefore we would like to maxmise precision by sacrifising recall. The result confusion matrix is shown here.
 
