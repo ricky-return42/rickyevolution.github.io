@@ -1,9 +1,8 @@
 ---
 layout: post
-title: Learning From Disaster: Part 0
+title: Casual look at movies
 ---
 
-## Summary
 
 #### Introduction, problem and goal
 
